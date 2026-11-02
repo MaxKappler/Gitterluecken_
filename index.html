@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c7cbce">
+  <meta name="description" content="Kristallstrukturen und Gitterlücken interaktiv verstehen: kfz, krz und hdp als Kugelmodell, Kugelmittelpunktmodell und Schnittmodell.">
+  <title>Gittertypen · kfz</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css?v=20261102-i18n">
+  <script type="importmap">
+    {"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1.1 7M4 4v6h6"/></symbol>
+    <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+    <symbol id="i-fullscreen-exit" viewBox="0 0 24 24"><path d="M3 8h5V3m8 0v5h5M8 21v-5H3m13 5v-5h5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4 2c-1 .6-1.5 1-1.5 2.5M12 17h.01"/></symbol>
+    <symbol id="i-drag" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M9 6l3-3 3 3m-6 12 3 3 3-3M6 9l-3 3 3 3m12-6 3 3-3 3"/></symbol>
+    <symbol id="i-sphere" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M7 10a5 5 0 0 1 5-3"/></symbol>
+    <symbol id="i-points" viewBox="0 0 24 24"><path d="M5 5h14v14H5Z"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-cut" viewBox="0 0 24 24"><path d="M4 4h16v16H4Z"/><path d="M4 9a5 5 0 0 0 5-5m6 0a5 5 0 0 0 5 5M4 15a5 5 0 0 1 5 5m6 0a5 5 0 0 1 5-5"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Modell</a>
+  <header class="mobile-bar">
+    <button id="menu-open" class="icon-button" aria-controls="sidebar" aria-expanded="false" data-label="openMenu"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <span class="mobile-brand" data-i18n="brand">Gittertypen</span>
+  </header>
+  <button id="menu-backdrop" class="menu-backdrop" tabindex="-1" data-label="closeMenu" hidden></button>
+  <aside id="sidebar" class="sidebar" data-label="navigation">
+    <div class="brand-row">
+      <span class="brand" data-i18n="brand">Gittertypen</span>
+      <button id="menu-close" class="icon-button mobile-only" data-label="closeMenu"><svg class="icon"><use href="#i-close"/></svg></button>
+    </div>
+    <nav class="structure-nav" data-label="structureSelection">
+      <h2 class="section-label" data-i18n="unitCell">Elementarzelle</h2>
+      <button class="structure-button active" data-structure="kfz" aria-current="page"><span class="structure-code" data-i18n="codes.kfz">kfz</span><span data-i18n="fccShort">Flächenzentriert</span><span class="active-dot" aria-hidden="true"></span></button>
+      <button class="structure-button" data-structure="krz"><span class="structure-code" data-i18n="codes.krz">krz</span><span data-i18n="bccShort">Raumzentriert</span><span class="active-dot" aria-hidden="true" hidden></span></button>
+      <button class="structure-button" data-structure="hdp"><span class="structure-code" data-i18n="codes.hdp">hdp</span><span data-i18n="hcpShort">Hexagonal</span><span class="active-dot" aria-hidden="true" hidden></span></button>
+    </nav>
+    <fieldset class="model-options">
+      <legend class="section-label" data-i18n="representation">Darstellung</legend>
+      <label class="model-option"><input type="radio" name="model" value="kugelmodell" checked><svg class="icon"><use href="#i-sphere"/></svg><span><strong data-i18n="models.kugelmodell.name">Kugelmodell</strong><small data-i18n="models.kugelmodell.short">Berührende Kugeln</small></span><span class="radio-mark" aria-hidden="true"></span></label>
+      <label class="model-option"><input type="radio" name="model" value="kugelmittelpunkte"><svg class="icon"><use href="#i-points"/></svg><span><strong data-i18n="models.kugelmittelpunkte.name">Kugelmittelpunkte</strong><small data-i18n="models.kugelmittelpunkte.short">Positionen der Atome</small></span><span class="radio-mark" aria-hidden="true"></span></label>
+      <label class="model-option"><input type="radio" name="model" value="schnittmodell"><svg class="icon"><use href="#i-cut"/></svg><span><strong data-i18n="models.schnittmodell.name">Schnittmodell</strong><small data-i18n="models.schnittmodell.short">Atomanteile in der Zelle</small></span><span class="radio-mark" aria-hidden="true"></span></label>
+    </fieldset>
+    <fieldset class="visibility-options">
+      <legend class="section-label" data-i18n="show">Einblenden</legend>
+      <label class="checkbox-row"><span data-i18n="edges">Zellkanten</span><input id="show-edges" type="checkbox" checked></label>
+      <label class="checkbox-row"><span data-i18n="dimension">Bemaßung a</span><input id="show-dimension" type="checkbox" checked></label>
+    </fieldset>
+    <fieldset id="interstitial-sidebar" class="interstitial-controls"><legend class="section-label" data-i18n="interstitials.title">Gitterlücken</legend></fieldset>
+    <div class="sidebar-footer"><button id="help-open" class="help-button"><svg class="icon"><use href="#i-help"/></svg><span data-i18n="help">Bedienung</span></button></div>
+  </aside>
+
+  <main id="main" class="main" tabindex="-1">
+    <header class="page-header">
+      <h1><span id="structure-title">Kubisch flächenzentriert</span> <span class="structure-badge" data-structure-code>kfz</span></h1>
+      <div class="language-options" role="group" data-label="language">
+        <button type="button" data-language="de" aria-label="Deutsch" lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-language="en" aria-label="English" lang="en" aria-pressed="false">ENG</button>
+      </div>
+    </header>
+    <section id="viewer-panel" class="viewer-panel" aria-labelledby="model-title">
+      <div class="viewer-toolbar">
+        <div class="viewer-title">
+          <span class="view-dot" aria-hidden="true"></span><h2 id="model-title">Kugelmodell</h2>
+          <div id="fullscreen-selectors" class="fullscreen-selectors" hidden>
+            <label class="fullscreen-field fullscreen-structure-field" for="fullscreen-structure"><span data-i18n="structureType">Gittertyp</span><select id="fullscreen-structure" class="fullscreen-select"><option value="kfz" data-i18n="codes.kfz">kfz</option><option value="krz" data-i18n="codes.krz">krz</option><option value="hdp" data-i18n="codes.hdp">hdp</option></select></label>
+            <label class="fullscreen-field" for="fullscreen-model"><span data-i18n="representation">Darstellung</span><select id="fullscreen-model" class="fullscreen-select"><option value="kugelmodell" data-i18n="models.kugelmodell.name">Kugelmodell</option><option value="kugelmittelpunkte" data-i18n="models.kugelmittelpunkte.name">Kugelmittelpunkte</option><option value="schnittmodell" data-i18n="models.schnittmodell.name">Schnittmodell</option></select></label>
+          </div>
+        </div>
+        <div class="viewer-actions"><button id="reset" class="text-button" data-label="resetAll" disabled><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg><span data-i18n="reset">Zurücksetzen</span></button><button id="fullscreen" class="text-button" data-label="fullscreen.enter" aria-pressed="false" aria-controls="viewer-panel"><svg class="icon" aria-hidden="true"><use id="fullscreen-icon" href="#i-fullscreen"/></svg><span id="fullscreen-text" data-i18n="fullscreen.open">Vollbild</span></button></div>
+      </div>
+      <div id="fullscreen-settings" class="fullscreen-settings" role="group" data-label="show" hidden>
+        <label class="checkbox-row"><span data-i18n="edges">Zellkanten</span><input id="fullscreen-edges" type="checkbox" checked></label>
+        <label class="checkbox-row"><span data-i18n="dimension">Bemaßung a</span><input id="fullscreen-dimension" type="checkbox" checked></label>
+        <div id="interstitial-fullscreen" class="interstitial-controls" role="group" data-label="interstitials.title"></div>
+      </div>
+      <div id="stage" class="stage" aria-busy="true">
+        <canvas id="model-canvas" tabindex="0" aria-describedby="gesture-hint"></canvas>
+        <span id="dimension-label" class="dimension-label" aria-hidden="true" hidden>a</span>
+        <span id="height-label" class="dimension-label" aria-hidden="true" hidden>c</span>
+        <div id="load-state" class="load-state" role="status"><span id="load-message" data-i18n="loading">Modell wird geladen …</span><button id="retry" class="text-button" data-i18n="retry" hidden>Erneut versuchen</button></div>
+        <div id="transparency-badge" class="transparency-badge" hidden></div>
+        <div class="zoom-tools" role="group" data-label="zoom"><button id="zoom-in" class="icon-button" data-label="zoomIn" disabled><svg class="icon"><use href="#i-plus"/></svg></button><span class="tool-separator"></span><button id="zoom-out" class="icon-button" data-label="zoomOut" disabled><svg class="icon"><use href="#i-minus"/></svg></button></div>
+      </div>
+      <div class="viewer-caption"><p id="gesture-hint"><svg class="icon"><use href="#i-drag"/></svg><span data-i18n="gestures">Ziehen zum Drehen · Scrollen oder Aufziehen zum Zoomen</span></p><span id="scale-caption" class="scale-caption">a = Kantenlänge</span></div>
+      <p id="interstitial-note" class="interstitial-note"><span id="interstitial-note-space" class="interstitial-note-space" aria-hidden="true"></span><span id="interstitial-note-text" hidden></span></p>
+      <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+    <p id="model-note" class="model-note"></p>
+    <section class="crystal-facts" aria-labelledby="facts-title">
+      <div class="facts-heading"><h2 id="facts-title">kfz · Kennwerte</h2><span data-i18n="facts.assumption">Ideales Hartkugelmodell</span></div>
+      <div class="facts-grid">
+        <section class="fact-group atom-facts" aria-labelledby="atom-facts-title">
+          <h3 id="atom-facts-title" data-i18n="facts.atom">Gitteratom</h3>
+          <dl>
+            <div class="metric"><dt data-i18n="facts.radius">Atomradius</dt><dd><div data-formula="atomRadius"></div><div class="math-approximation" data-formula="atomRadiusApprox"></div></dd></div>
+            <div class="metric"><dt data-i18n="facts.coordination">Koordinationszahl</dt><dd data-formula="coordination"></dd></div>
+          </dl>
+          <section class="cell-counts" aria-labelledby="cell-counts-title">
+            <h3 id="cell-counts-title"></h3>
+            <dl>
+              <div><dt data-i18n="facts.atoms">Atome</dt><dd data-count="atoms"></dd></div>
+              <div><dt data-i18n="interstitials.octahedral">Oktaederlücken</dt><dd data-count="octahedral"></dd></div>
+              <div><dt data-i18n="interstitials.tetrahedral">Tetraederlücken</dt><dd data-count="tetrahedral"></dd></div>
+            </dl>
+          </section>
+          <dl id="height-ratio" hidden>
+            <div class="metric"><dt data-i18n="facts.heightRatio">Ideales Höhenverhältnis</dt><dd data-formula="heightRatio"></dd></div>
+          </dl>
+        </section>
+        <section class="fact-group" aria-labelledby="octa-facts-title">
+          <h3 id="octa-facts-title" data-i18n="facts.octahedral">Oktaederlücke</h3>
+          <dl>
+            <div class="metric"><dt data-i18n="facts.inscribedRadius">Maximaler Kugelradius</dt><dd><div data-formula="octaRadius"></div><div class="math-approximation" data-formula="octaRadiusApprox"></div></dd></div>
+            <div class="metric"><dt data-i18n="facts.ratio">Radienverhältnis</dt><dd data-formula="octaRatio"></dd></div>
+          </dl>
+        </section>
+        <section class="fact-group" aria-labelledby="tetra-facts-title">
+          <h3 id="tetra-facts-title" data-i18n="facts.tetrahedral">Tetraederlücke</h3>
+          <dl>
+            <div class="metric"><dt data-i18n="facts.inscribedRadius">Maximaler Kugelradius</dt><dd><div data-formula="tetraRadius"></div><div class="math-approximation" data-formula="tetraRadiusApprox"></div></dd></div>
+            <div class="metric"><dt data-i18n="facts.ratio">Radienverhältnis</dt><dd data-formula="tetraRatio"></dd></div>
+          </dl>
+        </section>
+      </div>
+      <p class="facts-legend"><span><math><mi>a</mi></math>: <span data-i18n="facts.latticeConstant">Gitterkonstante</span></span><span id="height-legend" hidden><math><mi>c</mi></math>: <span data-i18n="facts.height">Prismenhöhe</span></span><span><math><mi>R</mi></math>: <span data-i18n="facts.radius">Atomradius</span></span><span><math><msub><mi>r</mi><mi mathvariant="normal">T</mi></msub><mo>,</mo><msub><mi>r</mi><mi mathvariant="normal">O</mi></msub></math>: <span data-i18n="facts.noExpansion">Lückenradien ohne Gitteraufweitung.</span></span></p>
+    </section>
+    <p id="structure-facts-note" class="model-note" hidden></p>
+    <details id="atom-access" class="atom-access"><summary data-i18n="atomList">Kugeln per Liste auswählen</summary><p data-i18n="atomListHint">Alternative zum Anklicken im Modell. Erneutes Auswählen stellt die Kugel wieder her.</p><div id="atom-buttons" class="atom-buttons"></div></details>
+    <noscript><p class="noscript">Für die interaktive 3D-Ansicht muss JavaScript im Browser aktiviert sein.<br><span lang="en">Enable JavaScript in your browser to use the interactive 3D view.</span></p></noscript>
+  </main>
+  <dialog id="fullscreen-dialog" class="fullscreen-dialog" data-label="fullscreen.dialog"></dialog>
+
+  <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title">
+    <div class="dialog-heading"><h2 id="help-title" data-i18n="help">Bedienung</h2><button id="help-close" class="icon-button" data-label="closeHelp"><svg class="icon"><use href="#i-close"/></svg></button></div>
+    <dl id="help-content"></dl>
+    <p class="dialog-note" data-i18n="fixedGeometry">Atompositionen und Radien sind fest vorgegeben.</p>
+  </dialog>
+  <script type="module" src="./src/app.js?v=20261102-i18n"></script>
+</body>
+</html>
