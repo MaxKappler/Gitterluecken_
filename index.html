@@ -7,7 +7,7 @@
   <meta name="description" content="Kristallstrukturen und Gitterlücken interaktiv verstehen: kfz, krz und hdp als Kugelmodell, Kugelmittelpunktmodell und Schnittmodell.">
   <title>Gittertypen · kfz</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=20261102-i18n">
+  <link rel="stylesheet" href="./styles.css?v=20261103-mobil">
   <script type="importmap">
     {"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
   </script>
@@ -78,7 +78,11 @@
             <label class="fullscreen-field" for="fullscreen-model"><span data-i18n="representation">Darstellung</span><select id="fullscreen-model" class="fullscreen-select"><option value="kugelmodell" data-i18n="models.kugelmodell.name">Kugelmodell</option><option value="kugelmittelpunkte" data-i18n="models.kugelmittelpunkte.name">Kugelmittelpunkte</option><option value="schnittmodell" data-i18n="models.schnittmodell.name">Schnittmodell</option></select></label>
           </div>
         </div>
-        <div class="viewer-actions"><button id="reset" class="text-button" data-label="resetAll" disabled><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg><span data-i18n="reset">Zurücksetzen</span></button><button id="fullscreen" class="text-button" data-label="fullscreen.enter" aria-pressed="false" aria-controls="viewer-panel"><svg class="icon" aria-hidden="true"><use id="fullscreen-icon" href="#i-fullscreen"/></svg><span id="fullscreen-text" data-i18n="fullscreen.open">Vollbild</span></button></div>
+        <div class="viewer-actions">
+          <button id="fullscreen-options" type="button" class="text-button" data-i18n="fullscreen.settings" aria-expanded="false" aria-controls="fullscreen-settings">Anzeigeoptionen</button>
+          <button id="reset" class="text-button" data-label="resetAll" disabled><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg><span data-i18n="reset">Zurücksetzen</span></button>
+          <button id="fullscreen" class="text-button" data-label="fullscreen.enter" aria-pressed="false" aria-controls="viewer-panel"><svg class="icon" aria-hidden="true"><use id="fullscreen-icon" href="#i-fullscreen"/></svg><span id="fullscreen-text" data-i18n="fullscreen.open">Vollbild</span></button>
+        </div>
       </div>
       <div id="fullscreen-settings" class="fullscreen-settings" role="group" data-label="show" hidden>
         <label class="checkbox-row"><span data-i18n="edges">Zellkanten</span><input id="fullscreen-edges" type="checkbox" checked></label>
@@ -147,6 +151,6 @@
     <dl id="help-content"></dl>
     <p class="dialog-note" data-i18n="fixedGeometry">Atompositionen und Radien sind fest vorgegeben.</p>
   </dialog>
-  <script type="module" src="./src/app.js?v=20261102-i18n"></script>
+  <script type="module" src="./src/app.js?v=20261103-mobil"></script>
 </body>
 </html>

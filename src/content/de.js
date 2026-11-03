@@ -26,6 +26,7 @@ export default {
   },
   reset: 'Zurücksetzen', resetAll: 'Ansicht, Transparenz und Einblendungen zurücksetzen',
   fullscreen: {
+    settings: 'Anzeigeoptionen',
     open: 'Vollbild', close: 'Vollbild verlassen', enter: '3D-Ansicht im Vollbild öffnen',
     dialog: '3D-Ansicht im Vollbild', opened: 'Vollbild geöffnet. Mit Escape oder der Schaltfläche Vollbild verlassen zurückkehren.',
     closed: 'Vollbild geschlossen.', exitError: 'Bitte verlasse das Vollbild mit der Escape-Taste.'

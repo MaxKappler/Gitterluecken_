@@ -1,5 +1,5 @@
-import de from './content/de.js?v=20261102-i18n';
-import en from './content/en.js?v=20261102-i18n';
+import de from './content/de.js?v=20261103-mobil';
+import en from './content/en.js?v=20261103-mobil';
 import {models, structures} from './models.js?v=20261102-kennwerte';
 import {setupFullscreen} from './fullscreen.js';
 import {createInterstitialControls, emptyInterstitialState} from './interstitial-controls.js?v=20261102-i18n';
@@ -245,9 +245,23 @@ function refreshFullscreenLabels(active) {
   $('fullscreen').setAttribute('aria-label', label);
   $('fullscreen').title = label;
 }
+const optionsButton = $('fullscreen-options');
+function setOptionsOpen(open) {
+  optionsButton.setAttribute('aria-expanded', String(open));
+  $('viewer-panel').classList.toggle('options-open', open);
+}
+optionsButton.addEventListener('click', () => setOptionsOpen(optionsButton.getAttribute('aria-expanded') !== 'true'));
+$('viewer-panel').addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || optionsButton.getAttribute('aria-expanded') !== 'true' || !optionsButton.getClientRects().length) return;
+  event.preventDefault();
+  event.stopPropagation();
+  setOptionsOpen(false);
+  optionsButton.focus();
+}, {capture: true});
 setupFullscreen({
   panel: $('viewer-panel'), button: $('fullscreen'), dialog: $('fullscreen-dialog'),
   onChange(active) {
+    setOptionsOpen(false);
     $('fullscreen-selectors').hidden = !active;
     $('fullscreen-settings').hidden = !active;
     $('model-title').hidden = active;

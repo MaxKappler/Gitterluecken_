@@ -357,27 +357,6 @@ fieldset {
   .all-sites {
     min-height:40px;
   }
-  #interstitial-fullscreen {
-    width:100%;
-    gap:4px;
-  }
-  #interstitial-fullscreen .interstitial-card {
-    width:100%;
-  }
-  #interstitial-fullscreen .polyhedron-selection {
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:4px 12px;
-  }
-  #interstitial-fullscreen .site-navigation {
-    flex:1;
-    min-width:155px;
-  }
-  #interstitial-fullscreen .site-step {
-    width:32px;
-    height:40px;
-  }
   .interstitial-note {
     padding:0 12px 8px;
     font-size:10px;
@@ -520,6 +499,9 @@ h1 {
   align-items:center;
   gap:8px;
   flex-shrink:0;
+}
+#fullscreen-options {
+  display:none;
 }
 .fullscreen-selectors {
   display:grid;
@@ -903,10 +885,6 @@ h1 {
     padding:7px 8px;
     gap:5px;
   }
-  .stage {
-    height:clamp(420px,72dvh,760px);
-    min-height:420px;
-  }
   .viewer-caption {
     font-size:9px;
     padding:10px 12px;
@@ -1109,7 +1087,7 @@ body.has-fullscreen-viewer {
 }
 
 /* Short landscape screens keep controls beside the canvas instead of consuming its height. */
-@media (max-height:500px) and (min-width:560px) {
+@media (max-height:500px) and (min-width:1001px) {
   .viewer-panel.is-fullscreen {
     display:grid;
     grid-template-columns:230px minmax(0,1fr);
@@ -1158,6 +1136,120 @@ body.has-fullscreen-viewer {
     padding:0 12px 6px;
     font-size:10px;
   }
+}
+
+/* On phones the controls share the canvas row instead of reducing its height. */
+@media (max-width:760px), (max-width:1000px) and (max-height:500px) {
+  .viewer-panel:not(.is-fullscreen) .stage {
+    height:clamp(175px,54vh,480px);
+    height:clamp(175px,54svh,480px);
+    min-height:0;
+  }
+  .viewer-panel.is-fullscreen {
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto minmax(0,1fr) auto auto;
+  }
+  .viewer-panel.is-fullscreen .viewer-toolbar {
+    grid-row:1;
+    gap:6px;
+    padding: max(5px,env(safe-area-inset-top)) 8px 5px;
+    border-bottom:1px solid var(--line);
+  }
+  .viewer-panel.is-fullscreen .stage,
+  .viewer-panel.is-fullscreen .fullscreen-settings {
+    grid-area:2 / 1;
+  }
+  .viewer-panel.is-fullscreen .viewer-caption {
+    grid-row:3;
+    padding:4px 10px;
+  }
+  .viewer-panel.is-fullscreen .interstitial-note {
+    grid-row:4;
+    padding:0 10px max(5px,env(safe-area-inset-bottom));
+  }
+  .viewer-panel.is-fullscreen #fullscreen-options {
+    display:inline-flex;
+    width:auto;
+    min-height:44px;
+    padding-inline:10px;
+    font-size:12px;
+  }
+  #fullscreen-options::after {
+    content:'';
+    width:6px;
+    height:6px;
+    border:solid currentColor;
+    border-width:0 1.5px 1.5px 0;
+    transform:translateY(-2px) rotate(45deg);
+  }
+  #fullscreen-options[aria-expanded="true"]::after {
+    transform:translateY(2px) rotate(225deg);
+  }
+  .viewer-panel.is-fullscreen .viewer-actions .text-button:not(#fullscreen-options) {
+    width:44px;
+    min-height:44px;
+    padding:0;
+  }
+  .viewer-panel.is-fullscreen .viewer-actions .text-button span {
+    display:none;
+  }
+  .viewer-panel.is-fullscreen .fullscreen-settings {
+    display:none;
+    z-index:5;
+    align-self:start;
+    justify-self:end;
+    width:min(380px,calc(100% - 12px));
+    max-height:calc(100% - 6px);
+    margin:0 6px;
+    padding:2px 10px 6px;
+    border:1px solid var(--line);
+    border-top:0;
+    border-radius:0 0 9px 9px;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0 8px;
+  }
+  .viewer-panel.is-fullscreen.options-open .fullscreen-settings {
+    display:grid;
+  }
+  .viewer-panel.is-fullscreen #interstitial-fullscreen {
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    width:100%;
+  }
+  .viewer-panel.is-fullscreen #interstitial-fullscreen .interstitial-card {
+    width:auto;
+  }
+  .viewer-panel.is-fullscreen .fullscreen-settings .checkbox-row {
+    min-height:44px;
+    gap:6px;
+    font-size:12px;
+  }
+  #interstitial-fullscreen .interstitial-name { gap:4px; }
+  #interstitial-fullscreen .hole-swatch { width:8px; height:8px; }
+  .viewer-panel.is-fullscreen #interstitial-fullscreen .polyhedron-selection {
+    display:block;
+    padding:0;
+  }
+  #interstitial-fullscreen .interstitial-card:has(.interstitial-toggle input:not(:checked)) .polyhedron-selection {
+    display:none !important;
+  }
+  #interstitial-fullscreen .site-navigation {
+    display:grid;
+    grid-template-columns:40px minmax(0,1fr) 40px;
+    gap:2px;
+    min-width:0;
+  }
+  #interstitial-fullscreen .site-step { width:40px; height:44px; }
+  #interstitial-fullscreen .all-sites { margin:0; min-height:40px; }
+}
+@media (max-width:500px) {
+  .viewer-panel.is-fullscreen .viewer-actions { width:100%; }
+  .viewer-panel.is-fullscreen #fullscreen-options { margin-right:auto; }
 }
 
 /* Shared scientific reference, identical for all three representations. */

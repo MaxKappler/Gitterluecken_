@@ -1,7 +1,7 @@
 export default {
   skip: 'Skip to model', brand: 'Crystal structures',
-  language: 'Language', codes: {kfz: 'FCC', krz: 'BCC', hdp: 'HCP'},
-  description: 'Explore crystal structures and interstitial sites in FCC, BCC and HCP using hard-sphere, atom-centre and cutaway models.',
+  language: 'Language', codes: {kfz: 'fcc', krz: 'bcc', hdp: 'hcp'},
+  description: 'Explore crystal structures and interstitial sites in fcc, bcc and hcp using hard-sphere, atom-centre and cutaway models.',
   navigation: 'Unit cell, representation and display', openMenu: 'Open menu', closeMenu: 'Close menu',
   unitCell: 'Unit cell', structureSelection: 'Select unit cell', structureType: 'Crystal structure',
   fccShort: 'Face-centred cubic', bccShort: 'Body-centred cubic', hcpShort: 'Hexagonal close-packed', later: 'Coming later',
@@ -20,12 +20,13 @@ export default {
     },
     krz: {
       title: 'Body-centred cubic',
-      factsNote: 'Both coordination polyhedra in BCC are distorted. A sphere in an octahedral site touches only the two closest atoms. The other four are farther away.',
+      factsNote: 'Both coordination polyhedra in bcc are distorted. A sphere in an octahedral site touches only the two closest atoms. The other four are farther away.',
       polyhedra: 'Distorted coordination polyhedra connect atom centres. Their faces do not bound the actual void.'
     }
   },
   reset: 'Reset', resetAll: 'Reset view, transparency and visibility settings',
   fullscreen: {
+    settings: 'Display options',
     open: 'Full screen', close: 'Exit full screen', enter: 'Open 3D view in full screen',
     dialog: 'Full-screen 3D view', opened: 'Full screen opened. Press Escape or select Exit full screen to return.',
     closed: 'Full screen closed.', exitError: 'Press Escape to exit full screen.'
@@ -66,7 +67,7 @@ export default {
     },
     kugelmittelpunkte: {
       name: 'Atom centres', short: 'Atom positions',
-      note: 'The atom-centre model shows atom positions. The markers do not represent the actual atomic radii.'
+      note: 'The spheres are drawn with reduced radii to show the positions of the atom centres.'
     },
     schnittmodell: {
       name: 'Cutaway model', short: 'Atom fractions in the cell',
