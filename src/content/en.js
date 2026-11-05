@@ -7,6 +7,7 @@ export default {
   fccShort: 'Face-centred cubic', bccShort: 'Body-centred cubic', hcpShort: 'Hexagonal close-packed', later: 'Coming later',
   representation: 'Representation', show: 'Show', edges: 'Cell edges', dimension: 'Dimension a',
   help: 'Controls', closeHelp: 'Close controls',
+  credit: 'Created by M. Kappler, IAM-WK, KIT',
   structures: {
     kfz: {
       title: 'Face-centred cubic', factsNote: '',

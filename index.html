@@ -7,7 +7,7 @@
   <meta name="description" content="Kristallstrukturen und Gitterlücken interaktiv verstehen: kfz, krz und hdp als Kugelmodell, Kugelmittelpunktmodell und Schnittmodell.">
   <title>Gittertypen · kfz</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=20261103-mobil">
+  <link rel="stylesheet" href="./styles.css?v=20261105-credit">
   <script type="importmap">
     {"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
   </script>
@@ -58,7 +58,10 @@
       <label class="checkbox-row"><span data-i18n="dimension">Bemaßung a</span><input id="show-dimension" type="checkbox" checked></label>
     </fieldset>
     <fieldset id="interstitial-sidebar" class="interstitial-controls"><legend class="section-label" data-i18n="interstitials.title">Gitterlücken</legend></fieldset>
-    <div class="sidebar-footer"><button id="help-open" class="help-button"><svg class="icon"><use href="#i-help"/></svg><span data-i18n="help">Bedienung</span></button></div>
+    <div class="sidebar-footer">
+      <button id="help-open" class="help-button"><svg class="icon"><use href="#i-help"/></svg><span data-i18n="help">Bedienung</span></button>
+      <p class="site-credit" data-i18n="credit">Erstellt von M. Kappler, IAM-WK, KIT</p>
+    </div>
   </aside>
 
   <main id="main" class="main" tabindex="-1">
@@ -151,6 +154,6 @@
     <dl id="help-content"></dl>
     <p class="dialog-note" data-i18n="fixedGeometry">Atompositionen und Radien sind fest vorgegeben.</p>
   </dialog>
-  <script type="module" src="./src/app.js?v=20261103-mobil"></script>
+  <script type="module" src="./src/app.js?v=20261105-credit"></script>
 </body>
 </html>

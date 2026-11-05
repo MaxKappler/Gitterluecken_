@@ -401,6 +401,12 @@ fieldset {
   border-top:1px solid #b3bec5;
   padding:15px 10px 0;
 }
+.site-credit {
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
 .help-button {
   display:flex;
   gap:10px;

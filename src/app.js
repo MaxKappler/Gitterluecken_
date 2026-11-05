@@ -1,5 +1,5 @@
-import de from './content/de.js?v=20261103-mobil';
-import en from './content/en.js?v=20261103-mobil';
+import de from './content/de.js?v=20261105-credit';
+import en from './content/en.js?v=20261105-credit';
 import {models, structures} from './models.js?v=20261102-kennwerte';
 import {setupFullscreen} from './fullscreen.js';
 import {createInterstitialControls, emptyInterstitialState} from './interstitial-controls.js?v=20261102-i18n';

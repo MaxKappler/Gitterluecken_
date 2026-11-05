@@ -7,6 +7,7 @@ export default {
   fccShort: 'Flächenzentriert', bccShort: 'Raumzentriert', hcpShort: 'Hexagonal', later: 'Folgt',
   representation: 'Darstellung', show: 'Einblenden', edges: 'Zellkanten', dimension: 'Bemaßung a',
   help: 'Bedienung', closeHelp: 'Bedienung schließen',
+  credit: 'Erstellt von M. Kappler, IAM-WK, KIT',
   structures: {
     kfz: {
       title: 'Kubisch flächenzentriert', factsNote: '',
